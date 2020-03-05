@@ -33,15 +33,40 @@ class Solution {
 #### 2. 动态规划
 > **方法一:** <br>
 ***核心点***<br>
+用 **dp[i][j]** 表示子串序列[i, j]是否是回文; DP问题首先要考虑的是初始化的问题, 对于这道题
+我们要把所有单个字母序列以及连续两个字母序列全部判断出来, 然后在此基础上考虑3+个字母的序列.<br>
 ***Java实现与逻辑分析***<br>
+dp[i][j]用布尔型存储; 长度为1的序列全部是true, 长度为2的只需要简单判断就可以得出; 长度>2的序列
+可以写成循环, 依次判断长度为3, 4, 5 ...的序列.
 代码如下:
 ```java
+class Solution {
+    public int countSubstrings(String s) {
+        if(s.length() == 0) return 0;
+        int length = s.length();
+        boolean[][] dp = new boolean[length][length];
+        // length = 1
+        for(int i=0; i<length; i++) dp[i][i]=true;
+        int count = length;
+        // length = 2
+        for(int i=0; i<length-1; i++) {
+            if(s.charAt(i)==s.charAt(i+1)) {
+                dp[i][i+1]=true;
+                count++;
+            }
+        }
+        // length > 2
+        for(int len=2; len<length; len++) {
+            for(int i=0; i+len<length; i++) {
+                int j = i+len;
+                if((s.charAt(i)==s.charAt(j)) && dp[i+1][j-1]) {
+                    dp[i][j]=true;
+                    count++;
+                }
+            }
+        }
+        return count;
 
-```
-> **方法二:**<br>
-**核心点**<br>
-**Java实现与逻辑分析**<br>
-代码如下:
-```java
-
+    }
+}
 ```

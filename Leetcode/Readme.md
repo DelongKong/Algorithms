@@ -1,3 +1,3 @@
-# 数据结构和算法思考与总结
+# Leetcode 经典题目总结总结
 
-## leetcode Top 100: 
+## leetcode Top 100(Liked):
